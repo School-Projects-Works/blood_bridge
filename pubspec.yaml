@@ -27,10 +27,13 @@ dependencies:
   firebase_storage: ^11.2.3
   material_design_icons_flutter: ^7.0.7296
   image_picker: ^0.8.9
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.3.1
+  flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true
@@ -52,5 +55,5 @@ flutter_native_splash:
   android_12:
     image: assets/logos/logo_android_12.png
     icon_background_color: "#ffffff"
-    image_dark: assets/logos/android_12_splash.png
+    image_dark: assets/logos/logo_android_12.png
     icon_background_color_dark: "#ffffff"

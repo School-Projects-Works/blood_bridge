@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>376787726082-vlmvnfvjdn9fookv4n6eg1b43vitdmtu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.376787726082-vlmvnfvjdn9fookv4n6eg1b43vitdmtu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCrr9WfKYWDiwo89lykYCWP6TsyDwNQtI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>376787726082</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.bloodBridge</string>
+	<key>PROJECT_ID</key>
+	<string>blood-donor-request-gh</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blood-donor-request-gh.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:376787726082:ios:46cd6baeef6be01bd55c1b</string>
+</dict>
+</plist>

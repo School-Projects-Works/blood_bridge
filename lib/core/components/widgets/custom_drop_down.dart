@@ -79,6 +79,7 @@ class CustomDropDown extends StatelessWidget {
       validator: validator,
       value: value,
       isExpanded: true,
+      style: normalText(fontWeight: FontWeight.bold),
       icon: Icon(
         iconData ?? Icons.arrow_drop_down,
         color: primaryColor,

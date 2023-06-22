@@ -231,9 +231,11 @@ class _PersonalInfoState extends ConsumerState<PersonalInfo> {
                       ),
                       onPressed: () => showDatePicker(
                                   context: context,
-                                  initialDate: DateTime.now(),
+                                  initialDate: DateTime.now()
+                                      .subtract(const Duration(days: 365 * 18)),
                                   firstDate: DateTime(1900),
-                                  lastDate: DateTime.now())
+                                  lastDate: DateTime.now()
+                                      .subtract(const Duration(days: 365 * 18)))
                               .then((value) {
                             if (value != null) {
                               _dobController.text =
@@ -478,7 +480,6 @@ class _AddressInfoState extends ConsumerState<AddressInfo> {
                               value: e,
                               child: Text(
                                 e,
-                                style: normalText(),
                               )))
                           .toList(),
                       hintText: 'Region'),
@@ -533,6 +534,9 @@ class _AddressInfoState extends ConsumerState<AddressInfo> {
                           )
                         ]),
                   ),
+                  const SizedBox(
+                    height: 70,
+                  ),
                 ])),
           )),
     );
@@ -548,53 +552,184 @@ class MedicalInfo extends ConsumerStatefulWidget {
 
 class _MedicalInfoState extends ConsumerState<MedicalInfo> {
   final _formKey = GlobalKey<FormState>();
+  final _heightController = TextEditingController();
+  final _weightController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var user = ref.read(userProvider);
+      _heightController.text =
+          user.height != null ? user.height.toString() : '';
+      _weightController.text =
+          user.weight != null ? user.weight.toString() : '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
         child: Form(
             key: _formKey,
-            child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () =>
-                          ref.read(signUpIndexProvider.notifier).state = 0,
-                      icon: const Icon(Icons.arrow_back_ios),
-                    ),
-                  ),
-                  Image.asset(Assets.logosLogo, width: 200),
-                  Text('New User Account'.toUpperCase(),
-                      style: normalText(
-                          fontSize: 35, fontWeight: FontWeight.bold)),
-                  Text(
-                    'Medical Information',
-                    style: normalText(),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomDropDown(
-                      value: ref.read(userProvider).bloodGroup,
-                      onChanged: (bloodGroup) {
-                        ref
-                            .read(userProvider.notifier)
-                            .setUserBloodGroup(bloodGroup!);
+            child: ListTile(
+              title: Row(
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        ref.read(signUpIndexProvider.notifier).state = 0;
                       },
-                      icon: MdiIcons.needle,
-                      items: bloodGroupList
-                          .map((e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(
-                                e,
-                                style: normalText(),
-                              )))
-                          .toList(),
-                      hintText: 'Blood Type'),
-                ]))));
+                      icon: Icon(MdiIcons.arrowLeft),
+                      label: const Text('Back')),
+                ],
+              ),
+              subtitle: SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                    Image.asset(Assets.logosLogo, width: 200),
+                    Text('New User Account'.toUpperCase(),
+                        style: normalText(
+                            fontSize: 35, fontWeight: FontWeight.bold)),
+                    Text(
+                      'Medical Information',
+                      style: normalText(),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextFields(
+                      hintText: 'Height (cm)',
+                      controller: _heightController,
+                      prefixIcon: MdiIcons.humanMaleHeight,
+                      isDigitOnly: true,
+                      keyboardType: TextInputType.number,
+                      onSaved: (value) {
+                        ref.read(userProvider.notifier).setUserHeight(value!);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your height';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextFields(
+                      hintText: 'Weight (kg)',
+                      prefixIcon: MdiIcons.weight,
+                      controller: _weightController,
+                      isDigitOnly: true,
+                      keyboardType: TextInputType.number,
+                      onSaved: (value) {
+                        ref.read(userProvider.notifier).setUserWeight(value!);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your weight';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomDropDown(
+                        value: ref.read(userProvider).bloodGroup,
+                        onChanged: (bloodGroup) {
+                          ref
+                              .read(userProvider.notifier)
+                              .setUserBloodGroup(bloodGroup!);
+                        },
+                        icon: MdiIcons.needle,
+                        items: bloodGroupList
+                            .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(
+                                  e,
+                                )))
+                            .toList(),
+                        hintText: 'Blood Type'),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomDropDown(
+                        value: ref.read(userProvider).genotype,
+                        onChanged: (genotype) {
+                          ref
+                              .read(userProvider.notifier)
+                              .setUserGenotype(genotype!);
+                        },
+                        icon: MdiIcons.genderNonBinary,
+                        items: genotypeList
+                            .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(
+                                  e,
+                                )))
+                            .toList(),
+                        hintText: 'Select Genotype'),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomDropDown(
+                        value: ref.read(userProvider).vaccination,
+                        onChanged: (vacc) {
+                          ref
+                              .read(userProvider.notifier)
+                              .setUserVaccination(vacc!);
+                        },
+                        icon: MdiIcons.alert,
+                        items: ['Full', 'Partial', 'None']
+                            .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(
+                                  e,
+                                )))
+                            .toList(),
+                        hintText: 'Vaccination Status'),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                      text: 'Create Account'.toUpperCase(),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          ref.read(userProvider.notifier).createUser(ref);
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                          text: 'Already have an account ? ',
+                          style: normalText(fontSize: 15, color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: 'Login',
+                              style: normalText(
+                                  fontSize: 15,
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  ref
+                                      .read(authPageIndexProvider.notifier)
+                                      .state = 0;
+                                },
+                            )
+                          ]),
+                    ),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                  ])),
+            )));
   }
 }

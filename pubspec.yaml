@@ -1,0 +1,56 @@
+name: blood_bridge
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.3.6
+  flutter_smart_dialog: ^4.9.2
+  google_fonts: ^4.0.2
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.1
+  firebase_storage: ^11.2.3
+  material_design_icons_flutter: ^7.0.7296
+  image_picker: ^0.8.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/logos/
+    - assets/images/
+
+
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#ffffff"
+  image_dark: assets/logos/logo_normal.png
+  icon_background_color_dark: "#ffffff"
+  image: assets/logos/logo_normal.png
+  android: true
+  ios: true
+  fullscreen: true
+  android_12:
+    image: assets/logos/logo_android_12.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/logos/android_12_splash.png
+    icon_background_color_dark: "#ffffff"

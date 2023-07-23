@@ -31,7 +31,7 @@ class MyApp extends ConsumerStatefulWidget {
 
 class _MyAppState extends ConsumerState<MyApp> {
   Future<bool> _initUser() async {
-    await FirebaseAuthService.signOut();
+    //await FirebaseAuthService.signOut();
     if (FirebaseAuthService.isUserLogin()) {
       User user = FirebaseAuthService.getCurrentUser();
       UserModel? userModel = await FireStoreServices.getUser(user.uid);

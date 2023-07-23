@@ -5,101 +5,139 @@ import 'package:flutter/foundation.dart';
 
 class RequestModel {
   String? id;
-  String? region;
-  String? bloodType;
-  String? genotype;
-  String? vaccination;
-  String? status;
-  String? requestUserId;
-  Map<String, dynamic>? requestUser;
-  Map<String, dynamic>? donorUser;
-  String? donorId;
+  String? requesterId;
+  Map<String, dynamic>? requester;
+  String? patientName;
+  String? patientAge;
+  String? patientGender;
+  String? hospitalName;
+  String? hospitalAddress;
+  String? hospitalPhone;
+  Map<String, dynamic>? hospitalLocation;
+  List<dynamic>? bloodGroup;
+  double? bloodNeeded;
+  double? bloodDonated;
+  List<dynamic>? donors;
+  String? patientCondition;
   int? createdAt;
-  int? updatedAt;
   RequestModel({
     this.id,
-    this.region,
-    this.bloodType,
-    this.genotype,
-    this.vaccination,
-    this.status,
-    this.requestUserId,
-    this.requestUser,
-    this.donorUser,
-    this.donorId,
+    this.requesterId,
+    this.requester,
+    this.patientName,
+    this.patientAge,
+    this.patientGender,
+    this.hospitalName,
+    this.hospitalAddress,
+    this.hospitalPhone,
+    this.hospitalLocation,
+    this.bloodGroup,
+    this.bloodNeeded,
+    this.bloodDonated,
+    this.donors,
+    this.patientCondition,
     this.createdAt,
-    this.updatedAt,
   });
 
   RequestModel copyWith({
     String? id,
-    String? region,
-    String? bloodType,
-    String? genotype,
-    String? vaccination,
-    String? status,
-    String? requestUserId,
-    Map<String, dynamic>? requestUser,
-    Map<String, dynamic>? donorUser,
-    String? donorId,
+    String? requesterId,
+    Map<String, dynamic>? requester,
+    String? patientName,
+    String? patientAge,
+    String? patientGender,
+    String? hospitalName,
+    String? hospitalAddress,
+    String? hospitalPhone,
+    Map<String, dynamic>? hospitalLocation,
+    List<dynamic>? bloodGroup,
+    double? bloodNeeded,
+    double? bloodDonated,
+    List<dynamic>? donors,
+    String? patientCondition,
     int? createdAt,
-    int? updatedAt,
   }) {
     return RequestModel(
       id: id ?? this.id,
-      region: region ?? this.region,
-      bloodType: bloodType ?? this.bloodType,
-      genotype: genotype ?? this.genotype,
-      vaccination: vaccination ?? this.vaccination,
-      status: status ?? this.status,
-      requestUserId: requestUserId ?? this.requestUserId,
-      requestUser: requestUser ?? this.requestUser,
-      donorUser: donorUser ?? this.donorUser,
-      donorId: donorId ?? this.donorId,
+      requesterId: requesterId ?? this.requesterId,
+      requester: requester ?? this.requester,
+      patientName: patientName ?? this.patientName,
+      patientAge: patientAge ?? this.patientAge,
+      patientGender: patientGender ?? this.patientGender,
+      hospitalName: hospitalName ?? this.hospitalName,
+      hospitalAddress: hospitalAddress ?? this.hospitalAddress,
+      hospitalPhone: hospitalPhone ?? this.hospitalPhone,
+      hospitalLocation: hospitalLocation ?? this.hospitalLocation,
+      bloodGroup: bloodGroup ?? this.bloodGroup,
+      bloodNeeded: bloodNeeded ?? this.bloodNeeded,
+      bloodDonated: bloodDonated ?? this.bloodDonated,
+      donors: donors ?? this.donors,
+      patientCondition: patientCondition ?? this.patientCondition,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'region': region,
-      'bloodType': bloodType,
-      'genotype': genotype,
-      'vaccination': vaccination,
-      'status': status,
-      'requestUserId': requestUserId,
-      'requestUser': requestUser,
-      'donorUser': donorUser,
-      'donorId': donorId,
+      'requesterId': requesterId,
+      'requester': requester,
+      'patientName': patientName,
+      'patientAge': patientAge,
+      'patientGender': patientGender,
+      'hospitalName': hospitalName,
+      'hospitalAddress': hospitalAddress,
+      'hospitalPhone': hospitalPhone,
+      'hospitalLocation': hospitalLocation,
+      'bloodGroup': bloodGroup,
+      'bloodNeeded': bloodNeeded,
+      'bloodDonated': bloodDonated,
+      'donors': donors,
+      'patientCondition': patientCondition,
       'createdAt': createdAt,
-      'updatedAt': updatedAt,
     };
   }
 
   factory RequestModel.fromMap(Map<String, dynamic> map) {
     return RequestModel(
       id: map['id'] != null ? map['id'] as String : null,
-      region: map['region'] != null ? map['region'] as String : null,
-      bloodType: map['bloodType'] != null ? map['bloodType'] as String : null,
-      genotype: map['genotype'] != null ? map['genotype'] as String : null,
-      vaccination:
-          map['vaccination'] != null ? map['vaccination'] as String : null,
-      status: map['status'] != null ? map['status'] as String : null,
-      requestUserId:
-          map['requestUserId'] != null ? map['requestUserId'] as String : null,
-      requestUser: map['requestUser'] != null
+      requesterId:
+          map['requesterId'] != null ? map['requesterId'] as String : null,
+      requester: map['requester'] != null
           ? Map<String, dynamic>.from(
-              (map['requestUser'] as Map<String, dynamic>))
+              (map['requester'] as Map<String, dynamic>))
           : null,
-      donorUser: map['donorUser'] != null
+      patientName:
+          map['patientName'] != null ? map['patientName'] as String : null,
+      patientAge:
+          map['patientAge'] != null ? map['patientAge'] as String : null,
+      patientGender:
+          map['patientGender'] != null ? map['patientGender'] as String : null,
+      hospitalName:
+          map['hospitalName'] != null ? map['hospitalName'] as String : null,
+      hospitalAddress: map['hospitalAddress'] != null
+          ? map['hospitalAddress'] as String
+          : null,
+      hospitalPhone:
+          map['hospitalPhone'] != null ? map['hospitalPhone'] as String : null,
+      hospitalLocation: map['hospitalLocation'] != null
           ? Map<String, dynamic>.from(
-              (map['donorUser'] as Map<String, dynamic>))
+              (map['hospitalLocation'] as Map<String, dynamic>))
           : null,
-      donorId: map['donorId'] != null ? map['donorId'] as String : null,
+      bloodGroup: map['bloodGroup'] != null
+          ? List<dynamic>.from((map['bloodGroup'] as List<dynamic>))
+          : null,
+      bloodNeeded:
+          map['bloodNeeded'] != null ? map['bloodNeeded'] as double : null,
+      bloodDonated:
+          map['bloodDonated'] != null ? map['bloodDonated'] as double : null,
+      donors: map['donors'] != null
+          ? List<dynamic>.from((map['donors'] as List<dynamic>))
+          : null,
+      patientCondition: map['patientCondition'] != null
+          ? map['patientCondition'] as String
+          : null,
       createdAt: map['createdAt'] != null ? map['createdAt'] as int : null,
-      updatedAt: map['updatedAt'] != null ? map['updatedAt'] as int : null,
     );
   }
 
@@ -110,7 +148,7 @@ class RequestModel {
 
   @override
   String toString() {
-    return 'RequestModel(id: $id, region: $region, bloodType: $bloodType, genotype: $genotype, vaccination: $vaccination, status: $status, requestUserId: $requestUserId, requestUser: $requestUser, donorUser: $donorUser, donorId: $donorId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'RequestModel(id: $id, requesterId: $requesterId, requester: $requester, patientName: $patientName, patientAge: $patientAge, patientGender: $patientGender, hospitalName: $hospitalName, hospitalAddress: $hospitalAddress, hospitalPhone: $hospitalPhone, hospitalLocation: $hospitalLocation, bloodGroup: $bloodGroup, bloodNeeded: $bloodNeeded, bloodDonated: $bloodDonated, donors: $donors, patientCondition: $patientCondition, createdAt: $createdAt)';
   }
 
   @override
@@ -118,32 +156,40 @@ class RequestModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.region == region &&
-        other.bloodType == bloodType &&
-        other.genotype == genotype &&
-        other.vaccination == vaccination &&
-        other.status == status &&
-        other.requestUserId == requestUserId &&
-        mapEquals(other.requestUser, requestUser) &&
-        mapEquals(other.donorUser, donorUser) &&
-        other.donorId == donorId &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt;
+        other.requesterId == requesterId &&
+        mapEquals(other.requester, requester) &&
+        other.patientName == patientName &&
+        other.patientAge == patientAge &&
+        other.patientGender == patientGender &&
+        other.hospitalName == hospitalName &&
+        other.hospitalAddress == hospitalAddress &&
+        other.hospitalPhone == hospitalPhone &&
+        mapEquals(other.hospitalLocation, hospitalLocation) &&
+        listEquals(other.bloodGroup, bloodGroup) &&
+        other.bloodNeeded == bloodNeeded &&
+        other.bloodDonated == bloodDonated &&
+        listEquals(other.donors, donors) &&
+        other.patientCondition == patientCondition &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        region.hashCode ^
-        bloodType.hashCode ^
-        genotype.hashCode ^
-        vaccination.hashCode ^
-        status.hashCode ^
-        requestUserId.hashCode ^
-        requestUser.hashCode ^
-        donorUser.hashCode ^
-        donorId.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode;
+        requesterId.hashCode ^
+        requester.hashCode ^
+        patientName.hashCode ^
+        patientAge.hashCode ^
+        patientGender.hashCode ^
+        hospitalName.hashCode ^
+        hospitalAddress.hashCode ^
+        hospitalPhone.hashCode ^
+        hospitalLocation.hashCode ^
+        bloodGroup.hashCode ^
+        bloodNeeded.hashCode ^
+        bloodDonated.hashCode ^
+        donors.hashCode ^
+        patientCondition.hashCode ^
+        createdAt.hashCode;
   }
 }

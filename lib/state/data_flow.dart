@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:blood_bridge/core/components/widgets/smart_dialog.dart';
 import 'package:blood_bridge/services/firebase_auth.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Models/user_model.dart';
+import '../core/components/constants/strings.dart';
 import '../core/functions.dart';
 import '../presentation/pages/home/home_main_page.dart';
 import '../services/firebase_fireStore.dart';
@@ -87,7 +89,7 @@ class UserNotifier extends StateNotifier<UserModel> {
     CustomDialog.showLoading(
       message: 'Creating Account... Please wait...',
     );
-    //! create user using email and password
+
     final user = await FirebaseAuthService.createUserWithEmailAndPassword(
       state.email!,
       state.password!,
@@ -153,20 +155,42 @@ class UserSignIn extends StateNotifier<User?> {
     );
     if (user != null) {
       state = user;
-      CustomDialog.dismiss();
-      CustomDialog.showSuccess(
-          title: 'Welcome Back',
-          message: 'You have successfully signed in to your account');
-      if (mounted) {
-        noReturnSendToPage(
-          context,
-          const HomeMainPage(),
-        );
+      //get user info from firestore
+      UserModel? userModel = await FireStoreServices.getUser(user.uid);
+      if (userModel != null) {
+        ref.read(userProvider.notifier).setUser(userModel);
+        CustomDialog.dismiss();
+        CustomDialog.showSuccess(
+            title: 'Welcome Back',
+            message: 'You have successfully signed in to your account');
+        if (mounted) {
+          noReturnSendToPage(
+            context,
+            const HomeMainPage(),
+          );
+        }
+      } else {
+        // sign out user
+        await FirebaseAuthService.signOut();
+        CustomDialog.dismiss();
+        CustomDialog.showError(
+            title: 'Data Error',
+            message: 'Unable to get User info, try again later');
       }
     } else {
       CustomDialog.dismiss();
+      CustomDialog.showError(
+          title: 'Sign In Error',
+          message: 'Unable to sign in, check your email and password');
     }
   }
 }
 
 final userImageProvider = StateProvider<File?>((ref) => null);
+
+final randomQuoteProvider = Provider.autoDispose<String>((ref) {
+  var list = quotes;
+  var random = Random();
+  var index = random.nextInt(list.length);
+  return list[index];
+});

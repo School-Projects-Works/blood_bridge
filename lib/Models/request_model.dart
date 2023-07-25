@@ -20,6 +20,8 @@ class RequestModel {
   List<dynamic>? donors;
   String? patientCondition;
   int? createdAt;
+  String? patientImage;
+  bool? isCompleted;
   RequestModel({
     this.id,
     this.requesterId,
@@ -31,12 +33,14 @@ class RequestModel {
     this.hospitalAddress,
     this.hospitalPhone,
     this.hospitalLocation,
-    this.bloodGroup,
+    this.bloodGroup = const [],
     this.bloodNeeded,
     this.bloodDonated,
-    this.donors,
+    this.donors = const [],
     this.patientCondition,
     this.createdAt,
+    this.patientImage,
+    this.isCompleted = false,
   });
 
   RequestModel copyWith({
@@ -56,6 +60,8 @@ class RequestModel {
     List<dynamic>? donors,
     String? patientCondition,
     int? createdAt,
+    String? patientImage,
+    bool? isCompleted,
   }) {
     return RequestModel(
       id: id ?? this.id,
@@ -74,6 +80,8 @@ class RequestModel {
       donors: donors ?? this.donors,
       patientCondition: patientCondition ?? this.patientCondition,
       createdAt: createdAt ?? this.createdAt,
+      patientImage: patientImage ?? this.patientImage,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
@@ -95,6 +103,8 @@ class RequestModel {
       'donors': donors,
       'patientCondition': patientCondition,
       'createdAt': createdAt,
+      'patientImage': patientImage,
+      'isCompleted': isCompleted,
     };
   }
 
@@ -138,6 +148,10 @@ class RequestModel {
           ? map['patientCondition'] as String
           : null,
       createdAt: map['createdAt'] != null ? map['createdAt'] as int : null,
+      patientImage:
+          map['patientImage'] != null ? map['patientImage'] as String : null,
+      isCompleted:
+          map['isCompleted'] != null ? map['isCompleted'] as bool : null,
     );
   }
 
@@ -148,7 +162,7 @@ class RequestModel {
 
   @override
   String toString() {
-    return 'RequestModel(id: $id, requesterId: $requesterId, requester: $requester, patientName: $patientName, patientAge: $patientAge, patientGender: $patientGender, hospitalName: $hospitalName, hospitalAddress: $hospitalAddress, hospitalPhone: $hospitalPhone, hospitalLocation: $hospitalLocation, bloodGroup: $bloodGroup, bloodNeeded: $bloodNeeded, bloodDonated: $bloodDonated, donors: $donors, patientCondition: $patientCondition, createdAt: $createdAt)';
+    return 'RequestModel(id: $id, requesterId: $requesterId, requester: $requester, patientName: $patientName, patientAge: $patientAge, patientGender: $patientGender, hospitalName: $hospitalName, hospitalAddress: $hospitalAddress, hospitalPhone: $hospitalPhone, hospitalLocation: $hospitalLocation, bloodGroup: $bloodGroup, bloodNeeded: $bloodNeeded, bloodDonated: $bloodDonated, donors: $donors, patientCondition: $patientCondition, createdAt: $createdAt, patientImage: $patientImage, isCompleted: $isCompleted)';
   }
 
   @override
@@ -170,7 +184,9 @@ class RequestModel {
         other.bloodDonated == bloodDonated &&
         listEquals(other.donors, donors) &&
         other.patientCondition == patientCondition &&
-        other.createdAt == createdAt;
+        other.createdAt == createdAt &&
+        other.patientImage == patientImage &&
+        other.isCompleted == isCompleted;
   }
 
   @override
@@ -190,6 +206,37 @@ class RequestModel {
         bloodDonated.hashCode ^
         donors.hashCode ^
         patientCondition.hashCode ^
-        createdAt.hashCode;
+        createdAt.hashCode ^
+        patientImage.hashCode ^
+        isCompleted.hashCode;
+  }
+
+  RequestModel clear() {
+    return RequestModel(
+      id: null,
+      requesterId: null,
+      requester: null,
+      patientName: null,
+      patientAge: null,
+      patientGender: null,
+      hospitalName: null,
+      hospitalAddress: null,
+      hospitalPhone: null,
+      hospitalLocation: null,
+      bloodGroup: const [],
+      bloodNeeded: null,
+      bloodDonated: null,
+      donors: const [],
+      patientCondition: null,
+      createdAt: null,
+      patientImage: null,
+      isCompleted: false,
+    );
+  }
+
+  Map<Object, Object?> donorUpdateMap() {
+    return <Object, Object?>{
+      'donors': donors,
+    };
   }
 }

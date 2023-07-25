@@ -42,7 +42,14 @@ class CustomDialog {
       builder: (context) => Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            color: type == ToastType.success
+                ? Colors.green.withOpacity(.1)
+                : type == ToastType.error
+                    ? Colors.red.withOpacity(.1)
+                    : type == ToastType.warning
+                        ? Colors.amber.withOpacity(.1)
+                        : Colors.blue.withOpacity(.1),
+            borderRadius: BorderRadius.circular(10)),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(
             type == ToastType.success

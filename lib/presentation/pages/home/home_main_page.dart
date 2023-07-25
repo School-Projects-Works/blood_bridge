@@ -168,7 +168,7 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
                       ],
                     ),
                   if (ref.watch(bottomNavIndexProvider) == 0)
-                    Text(user.name!,
+                    Text(user.name ?? 'User',
                         style: GoogleFonts.lobster(
                             fontSize: 22, color: Colors.white)),
                 ],

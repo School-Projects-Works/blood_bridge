@@ -14,7 +14,23 @@ class AuthMainPage extends ConsumerWidget {
             body: IndexedStack(
       alignment: Alignment.center,
       index: ref.watch(authPageIndexProvider),
-      children: const [LoginPage(), SignUpPage()],
+      children: [
+        const LoginPage(),
+        const SignUpPage(),
+        Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Forget password Page'),
+              TextButton(
+                  onPressed: () {
+                    ref.read(authPageIndexProvider.notifier).state = 0;
+                  },
+                  child: Text('Back to Login'))
+            ],
+          ),
+        )
+      ],
     )));
   }
 }
